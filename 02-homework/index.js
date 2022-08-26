@@ -3,12 +3,12 @@ let N, M, missEven, result;
 
 do {
     N = Number(prompt("Введіть число N", 0));
-} while (!!N === false || (N ^ 0) !== N);
+} while (!!N === false || (N ^ 0) !== N || (N < 0));
 // console.log({ N });
 
 do {
     M = Number(prompt("Введіть число M", 0));
-} while (!!M === false || (M ^ 0) !== M);
+} while (!!M === false || (M ^ 0) !== M || (M <= N) || (M < 0));
 // console.log({ M });
 
 missEven = confirm("Пропускати парні?");
