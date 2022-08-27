@@ -24,3 +24,7 @@ console.log({ result });
 
 document.writeln('Пропускати парні: ' + missEven + '<br>');
 document.writeln('Сума чисел в заданому Вами діапазоні: ' + result);
+
+console.log(123);
+
+console.log();
