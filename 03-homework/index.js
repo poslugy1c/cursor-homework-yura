@@ -61,7 +61,7 @@ let convertCurrency = (sumСurrency) => {
     return result
 }
 
-const getRandomPassword = (sizePass) => {
+const getRandomPassword = (sizePass = 8) => {
     result = '';
     for (i = 0; i < sizePass; i++) {
         result = result + (Math.floor(Math.random() * 10)).toString();
@@ -72,7 +72,7 @@ const getRandomPassword = (sizePass) => {
 const deleteLetters = (letter, sentence) => {
     let result = '';
     sentence = sentence.toLowerCase();
-    for (i = 0; i < word.length; i++) {
+    for (i = 0; i < sentence.length; i++) {
         sentence[i] !== letter ? result = result + sentence[i] : result;
     }
 
@@ -80,13 +80,15 @@ const deleteLetters = (letter, sentence) => {
 }
 
 const isPalyndrom = (palyndrom) => {
-    palyndrom = palyndrom.toLowerCase();
-    palyndrom = palyndrom.split(' ').join('');
-    let check = '';
-    for (let i = palyndrom.length - 1; i >= 0; i--) {
-        check += palyndrom[i];
-    }
-    return palyndrom == check;
+    // palyndrom = palyndrom.toLowerCase();
+    // palyndrom = palyndrom.split(' ').join('');
+    // let check = '';
+    // for (let i = palyndrom.length - 1; i >= 0; i--) {
+    //     check += palyndrom[i];
+    // }
+    // return palyndrom == check;
+
+    return (palyndrom.split(' ').join('').split('').join('').toLowerCase() === palyndrom.split(' ').join('').split('').reverse().join('').toLowerCase());
 
 }
 
@@ -137,7 +139,7 @@ sumСurrency = '700EUR';
 document.writeln(`|   ${sumСurrency} = ${convertCurrency(sumСurrency)} <br>`);
 
 let sizePass = 8;
-document.writeln(`9. Випадковий пароль довжиною ${sizePass} - ${getRandomPassword(sizePass)} <br>`);
+document.writeln(`9. Випадковий пароль довжиною ${sizePass} - ${getRandomPassword()} <br>`);
 
 let letterDel = 'a';
 let sentenceDel = 'Astalavista bla bla blaaaa';
