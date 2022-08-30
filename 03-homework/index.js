@@ -88,7 +88,7 @@ const isPalyndrom = (palyndrom) => {
     // }
     // return palyndrom == check;
 
-    return (palyndrom.split(' ').join('').split('').join('').toLowerCase() === palyndrom.split(' ').join('').split('').reverse().join('').toLowerCase());
+    return palyndrom.split(' ').join('').split('').join('').toLowerCase() === palyndrom.split(' ').join('').split('').reverse().join('').toLowerCase();
 
 }
 
