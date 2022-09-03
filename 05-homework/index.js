@@ -33,4 +33,23 @@ const getModa = (...numbers) => {
     })[0];
 };
 
-document.writeln(`2. getModa(6, 2, 55, 11, 78, 2, 55, 77, 57, 87, 23, 2, 56, 3, 2) –> ${getModa(6, 2, 55, 11, 78, 2, 55.5, 77, 57, 87, 23, 2, 56, 3, 2, 55.5, 55.5, 55.5)} <br>`);
+document.writeln(`2. getModa(6, 2, 55, 11, 78, 2, 55, 77, 57, 87, 23, 2, 56, 3, 2) –> ${getModa(6, 2, 55, 11, 78, 2, 55, 77, 57, 87, 23, 2, 56, 3, 2)} <br>`);
+
+// 3.Створіть функцію getAverage(...numbers) – яка рахує середнє арифметичне всіх переданих в неї аргументів. НЕЦІЛІ ЧИСЛА ІГНОРУЮТЬСЯ
+const getAverage = (...numbers) => {
+    return numbers.filter(el => Number.isInteger(el)).reduce((acc, el) => acc + el, 0) / numbers.length;
+};
+
+document.writeln(`3. getAverage(6, 2, 55, 11, 78, 2, 55, 77, 57, 87, 23, 2, 56, 3, 2) –>  ${getAverage(6, 2, 55, 11, 78, 2, 55, 77, 57, 87, 23, 2, 56, 3, 2)} <br>`);
+
+// 4.Створіть функцію getMedian(...numbers) – яка рахує медіану всіх переданих в неї аргументів. НЕЦІЛІ ЧИСЛА ІГНОРУЮТЬСЯ
+const getMedian = (...numbers) => {
+    newNumbers = numbers.filter(el => Number.isInteger(el)).sort((a, b) => a - b);
+    if (newNumbers.length % 2) {
+        return newNumbers[Math.floor(newNumbers.length / 2)];
+    } else {
+        return (newNumbers[newNumbers.length / 2] + newNumbers[newNumbers.length / 2 - 1]) / 2;
+    }
+};
+
+document.writeln(`4. getMedian(1, 2, 3, 4) –>  ${getMedian(1, 2, 3, 4)} <br>`);
