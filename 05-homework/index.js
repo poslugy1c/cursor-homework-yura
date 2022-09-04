@@ -93,3 +93,48 @@ const replaceBadWords = (string) => {
 document.writeln(`8. replaceBadWords("Are you fucking kidding?") –>  ${replaceBadWords("Are you fucking kidding?")} <br>`);
 document.writeln(`   replaceBadWords("Holy shit!") –>  ${replaceBadWords("Holy shit!")} <br>`);
 document.writeln(`   replaceBadWords("It's bullshit!") –>  ${replaceBadWords("It's bullshit!")} <br>`);
+
+// 9.Створіть функцію divideByThree(word), яка розбиває кожне слово на умовні склади по 3 букви.
+// Якщо букв менше трьох – не розбиває.Пробіли завжди видаляються.Рядок приводится до нижнього регістру. 
+const divideByThree = (word) => {
+
+    let chunk = '';
+    let arr = word.toLowerCase().replaceAll(" ", '').split('').reduce((acc, el, i) => {
+        chunk += el;
+        if (!((i + 1) % 3)) {
+            acc.push(chunk);
+            chunk = '';
+        }
+        return acc;
+    }, []);
+    // console.log(chunk)
+
+    chunk.length ? arr.push(chunk) : arr;
+    return arr
+};
+
+document.writeln(`9. divideByThree("Commander") –>  ${divideByThree("Commander")} <br>`);
+document.writeln(`  divideByThree("lives") –>  ${divideByThree("lives")} <br>`);
+
+// 10.Створіть функцію generateCombinations(word),
+// яка видасть всі можливі перестановки(унікальні, без повторень)
+// букв в слові.Для тестів не передавайте слова в яких більше 10 букв.Краще взагалі обмежити работу функції 10 буквами. 
+const generateCombinations = (word) => {
+    if (word.length > 10) return 'error: words length should not exceed 10 symbols!';
+
+    let arr;
+    typeof word === 'string' ? arr = word.split('') : arr = word;
+
+    if (arr.length === 1) return arr;
+    // console.log(typeof arr)
+
+    return arr.reduce((acc, cur, i) => {
+        generateCombinations([...arr.slice(0, i), ...arr.slice(i + 1)]).map(value => acc.push([].concat(arr[i], value)));
+        return acc;
+    }, []);
+};
+
+document.writeln(`10. generateCombinations("man") –>  ${JSON.stringify(generateCombinations("man"))} <br>`);
+console.log(generateCombinations("man"));
+document.writeln(`10. generateCombinations("ol") –>  ${JSON.stringify(generateCombinations("ol"))} <br>`);
+document.writeln(`10. generateCombinations("world") –>  ${JSON.stringify(generateCombinations("world"))} <br>`);
