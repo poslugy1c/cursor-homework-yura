@@ -39,16 +39,23 @@ function getMySalary() {
     let taxes = Math.round(salary * this.tax);
     let profit = salary - taxes;
 
-    // let mySalary = {salary, taxes, profit };
-    let logMySalary = () => {
-        console.log({ salary, taxes, profit })
-    };
+    // Варіант в середені функції -> будуть виводитись однакові данні
+    // let logMySalary = () => {
+    //     console.log({ salary, taxes, profit })
+    // };
+    // setInterval(logMySalary, 10000);
 
-    setInterval(logMySalary, 10000);
+    console.log({ salary, taxes, profit });
 };
 
-getMySalary.call(ukraine);
-getMySalary.call(latvia);
-getMySalary.call(litva);
+// getMySalary.call(ukraine);
+// getMySalary.call(latvia);
+// getMySalary.call(litva);
+
+setInterval(() => getMySalary.call(ukraine), 10000);
+setInterval(() => getMySalary.call(latvia), 10000);
+setInterval(() => getMySalary.call(litva), 10000);
+
+
 
 
