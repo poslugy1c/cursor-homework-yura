@@ -1,25 +1,18 @@
 let wrapper = document.querySelector('.wrapper');
 let blocks = document.querySelector('.blocks');
 
-let a = [];
-function createBlock() {
-    for (let i = 0; i < 25; i++) {
-        a[i] = document.createElement("div");
-        a[i].classList.add("cell");
-        blocks.append(a[i]);
-    }
-    return a;
-}
-
+// Зродіть 25 квадратів розміру 50х50 пікселів кожен, зафарбовані у випадковий колір
 function generateBlocks() {
-    createBlock();
-    a.forEach((element) => {
-        element.style.background = getRandomBgColor();
-    });
-}
+    const getRandomColor = () => {
+        return `background-color: #${Math.random().toString(16).substring(2, 8)}`;
+    };
 
-const getRandomBgColor = () => {
-    return '#fff'
+    for (let i = 0; i < 25; i++) {
+        const block = document.createElement('div');
+        block.classList.add('cell');
+        block.style = getRandomColor();
+        blocks.append(block);
+    };
 };
 
 generateBlocks();
@@ -32,18 +25,22 @@ let advanced = document.createElement("div");
 advanced.classList.add('blocks');
 wrapper.append(advanced);
 
+// Advanced зробіть так, щоб квадрати змінювали колір раз на секунду
+const generateBlocksInterval = () => {
+    const getRandomColor = () => {
+        return `background-color: #${Math.random().toString(16).substring(2, 8)}`;
+    };
 
-function generateBlocksInterval() {
     for (let i = 0; i < 25; i++) {
-        const div = document.createElement('div');
-        div.classList.add('cell');
-        div.style = 'background-color:' + "#" + ("00000" + Math.floor(Math.random() * Math.pow(16, 6)).toString(16)).slice(-6);
+        const block = document.createElement('div');
+        block.classList.add('cell');
+        block.style = getRandomColor();
 
         setInterval(() => {
-            div.style = 'background-color:' + "#" + ("00000" + Math.floor(Math.random() * Math.pow(16, 6)).toString(16)).slice(-6);
+            block.style = getRandomColor();
         }, 1000);
 
-        advanced.append(div);
+        advanced.append(block);
     }
 }
-generateBlocksInterval()
+generateBlocksInterval();
