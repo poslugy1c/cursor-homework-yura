@@ -1,3 +1,4 @@
+// 1.
 // необхідно створити клас Student та розробляти методи всередині цього класу.
 class Student {
     constructor(university, course, fullName) {
@@ -51,3 +52,26 @@ console.log(student.getMarks);
 student.recover();
 console.log('Студент поновлен');
 console.log(student.getMarks);
+
+// 2.
+// Створіть новий клас BudgetStudent, який повністю наслідує клас Student
+class BudgetStudent extends Student {
+    constructor(university, course, fullName, marks) {
+        super(university, course, fullName, marks);
+        this.dismissed = false;
+        setInterval(() => {
+            this.getScholarship()
+        }, 30000);
+    };
+
+    getScholarship() {
+        if (this.getAverageMark() >= 4 && !this.dismissed) {
+            console.log(`Ви отримали 1400 грн стипендії`);
+        };
+    }
+};
+
+const studentBudget = new BudgetStudent('Гарвардський університет', '3', 'Bill Gates ');
+studentBudget.setMark = [5, 4, 5, 5, 4];
+console.log(studentBudget.getInfo());
+studentBudget.getScholarship();
