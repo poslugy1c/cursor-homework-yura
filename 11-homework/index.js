@@ -2,17 +2,21 @@ let audio = new Audio();
 let allDivs = document.querySelectorAll('div');
 let buttons = document.querySelectorAll('.button');
 
+const audioPlay = (keyCode) => {
+    let src = getSample(keyCode);
+    if (src) {
+        audio.src = src;
+        audio.play();
+    };
+};
+
 document.body.addEventListener('keydown', function (event) {
     removeActive();
     //console.log(event.code.slice(-1));
     let activeKey = document.getElementById(`key${event.code.slice(-1)}`);
     if (activeKey) {
         activeKey.classList.add('active');
-        let src = getSample("Key" + event.code.slice(-1));
-        if (src) {
-            audio.src = src;
-            audio.play();
-        };
+        audioPlay("Key" + event.code.slice(-1));
     };
 });
 
@@ -20,12 +24,7 @@ buttons.forEach((button) => {
     button.onclick = () => {
         removeActive();
         button.classList.add("active");
-        // console.log(button.id);
-        let src = getSample("Key" + button.id.slice(-1));
-        if (src) {
-            audio.src = src;
-            audio.play();
-        };
+        audioPlay("Key" + button.id.slice(-1));
     };
 });
 
