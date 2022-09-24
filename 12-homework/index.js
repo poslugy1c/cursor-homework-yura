@@ -8,14 +8,26 @@
 const getRandomChinese = async (length) => {
     let arr = [];
     const getPromis = () => {
-        return new Promise(resolve => setTimeout(() => resolve(String.fromCharCode(Date.now().toString().slice(-5))), 50));
+        return new Promise(resolve => setTimeout(() => {
+            let sign = String(Date.now()).slice(-5);
+            resolve(String.fromCharCode(sign))
+        }, 50));
     };
     while (length) {
         length--;
         arr.push(await getPromis());
     };
-    document.writeln(arr.join());
+
+    let res = arr.join();
+    console.log(res);
+    return res;
 };
 
-getRandomChinese(4);
+getRandomChinese(4).then(result => {
+    let h1 = document.createElement('h1')
+    document.querySelector('body').append(h1);
+    h1.innerHTML = result;
+});
+
+
 
