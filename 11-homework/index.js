@@ -2,6 +2,10 @@ let audio = new Audio();
 let allDivs = document.querySelectorAll('div');
 let buttons = document.querySelectorAll('.button');
 
+audio.onended = function () {
+    removeActive();
+};
+
 const audioPlay = (keyCode) => {
     let src = getSample(keyCode);
     if (src) {
