@@ -31,7 +31,6 @@ let nextPage;
 let prevPage;
 const film = document.querySelector('.button__input');
 const rormatWookiee = document.getElementById('rormatWookiee');
-let wookianMode = false;
 
 const setVisibility = () => {
     nextPage ? next.style.display = 'block' : next.style.display = 'none';
@@ -81,13 +80,6 @@ const getInfo = () => {
         })
         .then((characters) => {
             characters.forEach(urlCharacter => {
-
-                urlCharacter = wookianMode ? urlCharacter += '?format=wookiee' : urlCharacter;
-                //people з номерами 35 39 61 66 не мають format wookiee
-                if (noWookie(urlCharacter)) {
-                    return;
-                };
-
                 fetch(urlCharacter)
                     .then((resp) => resp.json())
                     .then((character) => {
@@ -105,20 +97,19 @@ const appendCard = (character) => {
     cartElem.classList.add('cartElem');
 
     let img = charactersImages[character.name] ? charactersImages[character.name] : `img/defoult.png`;
-
     cartElem.innerHTML = `               
-                <img src="${wookianMode ? `img/Chewbacca.jpg` : img}" alt="${wookianMode ? character.whrascwo : character.name}" />
-                <div>
+                <img src="${img}" alt="${character.name}" />
+                <div class="people" url= ${character.url}>
                     <div>
-                        <h3>${wookianMode ? character.whrascwo : character.name}</h3>
+                        <h3>${character.name}</h3>
                     </div>
                     <div>
                         <div>
-                            ${wookianMode ? 'rhahrcaoac_roworarc:' + character.rhahrcaoac_roworarc : 'birth year:' + character.birth_year}
+                            ${'birth year:' + character.birth_year}
                         </div>
                     </div>
                     <div class="gender">                      
-                        <img class="genderImg" src=img/${getGenderImg(wookianMode ? character.rrwowhwaworc : character.gender)} alt="${character.gender}" />
+                        <img class="genderImg" src=img/${getGenderImg(character.gender)} alt="${character.gender}" />
                     </div>
                 </div>     
                 `;
@@ -136,7 +127,6 @@ const renderPlanet = (url) => {
         fetch(url)
             .then((resp) => resp.json())
             .then((data) => {
-                // console.log(data);
                 // console.log(data.next);
                 nextPage = data.next;
                 prevPage = data.previous;
@@ -177,9 +167,48 @@ prev.onclick = () => {
     renderPlanet(prevPage);
 };
 
+const translateWookie = () => {
+
+    let characters = document.querySelectorAll('.people');
+
+    characters.forEach((el) => {
+        for (const attr of el.attributes) {
+            if (attr.name === 'url') {
+                let urlCharacter = attr.value;
+                //people з номерами 35 39 61 66 не мають format wookiee
+                if (noWookie(urlCharacter)) {
+                    continue;
+                };
+
+                fetch(urlCharacter + '?format=wookiee')
+                    .then((resp) => resp.json())
+                    .then((character) => {
+                        el.innerHTML = `               
+                            <div class="people" url= ${urlCharacter}>
+                                <div>
+                                    <h3>${character.whrascwo}</h3>
+                                </div>
+                                <div>
+                                    <div>
+                                        ${'rhahrcaoac_roworarc:' + character.rhahrcaoac_roworarc}
+                                    </div>
+                                </div>
+                                <div class="gender">                      
+                                    <img class="genderImg" src=img/${getGenderImg(character.rrwowhwaworc)} alt="${character.rrwowhwaworc}" />
+                                </div>
+                            </div>     
+                            `;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            };
+        };
+    });
+};
+
 rormatWookiee.onclick = () => {
-    wookianMode = true;
-    getInfo();
+    translateWookie();
 };
 
 

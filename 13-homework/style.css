@@ -44,9 +44,7 @@ body {
 }
 
 .button__input {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 20px;
+  margin: 10px 20px;
   width: 80px;
   height: 80px;
   font-size: 30px;
@@ -127,14 +125,16 @@ img {
 /* end  sw titrs*/
 
 .buttons {
+  margin-left: 20px;
+  margin-right: 20px;
   display: flex;
 }
 
 .button__next,
 .button__prev {
-  width: 160px;
-  margin-left: 20px;
   margin-right: 20px;
+  margin-left: 20px;
+  width: 160px;
 }
 
 #planets {
