@@ -8,12 +8,35 @@ const planets = document.getElementById('planets');
 const cards = document.querySelector('.cards');
 const body = document.querySelector('body');
 const next = document.getElementById('next');
-const charactersImages = {};
+const prev = document.getElementById('prev');
+const charactersImages = {
+    ['Boba Fett']: 'img/Boba Fett.jpg',
+    ['Bossk']: 'img/Bossk.jpg',
+    ['C-3PO']: 'img/C-3PO.jpg',
+    ['Chewbacca']: 'img/Chewbacca.jpg',
+    ['Darth Vader']: 'img/Darth Vader.jpg',
+    ['Han Solo']: 'img/Han Solo.jpg',
+    ['IG-88']: 'img/IG-88.jpg',
+    ['Lando Calrissian']: 'img/Lando Calrissian.jpg',
+    ['Leia Organa']: 'img/Leia Organa.jpg',
+    ['Lobot']: 'img/Lobot.jpg',
+    ['Luke Skywalker']: 'img/Luke Skywalker.jpg',
+    ['Obi-Wan Kenobi']: 'img/Obi-Wan Kenobi.jpg',
+    ['Palpatine']: 'img/Palpatine.jpg',
+    ['R2-D2']: 'img/R2-D2.jpg',
+    ['Wedge Antilles']: 'img/Wedge Antilles.jpg',
+    ['Yoda']: 'img/Yoda.jpg',
+};
 let nextPage;
+let prevPage;
 const film = document.querySelector('.button__input');
 const rormatWookiee = document.getElementById('rormatWookiee');
 let wookianMode = false;
 
+const setVisibility = () => {
+    nextPage ? next.style.display = 'block' : next.style.display = 'none';
+    prevPage ? prev.style.display = 'block' : prev.style.display = 'none';
+};
 
 const getGenderImg = (gender) => {
     if (gender === 'male') {
@@ -25,9 +48,26 @@ const getGenderImg = (gender) => {
     };
 };
 
+const noWookie = (peopleUrl) => {
+    let noWookie = ['35', '39', '61', '66'];
+    let isNoWookie = false;
+    noWookie.forEach((el) => {
+        if (peopleUrl.includes(el)) {
+            isNoWookie = true;
+        };
+    });
+    return isNoWookie;
+};
+
 const getInfo = () => {
+
+    if (film.value > 6 || film.value < 1) {
+        film.value = 2;
+    };
+
     cards.innerHTML = '';
     planets.innerHTML = '';
+
     let url = film.value ? urlFilms + `/${film.value}` : urlFilms + `/2`;
 
     fetch(url)
@@ -41,17 +81,16 @@ const getInfo = () => {
         })
         .then((characters) => {
             characters.forEach(urlCharacter => {
-                // console.log(urlCharacter);
+
                 urlCharacter = wookianMode ? urlCharacter += '?format=wookiee' : urlCharacter;
+                //people з номерами 35 39 61 66 не мають format wookiee
+                if (noWookie(urlCharacter)) {
+                    return;
+                };
+
                 fetch(urlCharacter)
                     .then((resp) => resp.json())
                     .then((character) => {
-                        // console.log(character);
-
-                        if (!wookianMode) {
-                            charactersImages[character.name] = `img/${character.name}.jpg`;
-                        };
-
                         appendCard(character);
                     })
                     .catch(function (error) {
@@ -65,8 +104,10 @@ const appendCard = (character) => {
     const cartElem = document.createElement('div');
     cartElem.classList.add('cartElem');
 
+    let img = charactersImages[character.name] ? charactersImages[character.name] : `img/defoult.png`;
+
     cartElem.innerHTML = `               
-                <img src="${wookianMode ? `img/Chewbacca.jpg` : charactersImages[character.name]}" alt="${wookianMode ? character.whrascwo : character.name}" />
+                <img src="${wookianMode ? `img/Chewbacca.jpg` : img}" alt="${wookianMode ? character.whrascwo : character.name}" />
                 <div>
                     <div>
                         <h3>${wookianMode ? character.whrascwo : character.name}</h3>
@@ -95,9 +136,13 @@ const renderPlanet = (url) => {
         fetch(url)
             .then((resp) => resp.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 // console.log(data.next);
                 nextPage = data.next;
+                prevPage = data.previous;
+
+                setVisibility();
+
                 data.results.forEach(planet => planets.innerHTML +=
                     `<div class="planet">
                        <h3>name: ${planet.name}</h3>
@@ -113,6 +158,8 @@ const renderPlanet = (url) => {
     };
 };
 
+setVisibility();
+
 buttonGetInfo.onclick = () => {
     wookianMode = false;
     getInfo();
@@ -124,6 +171,10 @@ buttonGetPlanet.onclick = () => {
 
 next.onclick = () => {
     renderPlanet(nextPage);
+};
+
+prev.onclick = () => {
+    renderPlanet(prevPage);
 };
 
 rormatWookiee.onclick = () => {
