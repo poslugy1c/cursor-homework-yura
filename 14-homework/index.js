@@ -11,7 +11,7 @@ console.log(idGenerator.next().value);
 console.log(idGenerator.next().value);
 console.log(idGenerator.next().value);
 
-//Завдання 2
+// Завдання 2
 const increase = document.getElementById("inc");
 const decrease = document.getElementById("dec");
 const h1 = document.querySelector("h1");
