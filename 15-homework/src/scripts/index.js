@@ -1,6 +1,7 @@
 import "../styles/styles.css";
 import "../styles/hw10.css";
 import "../styles/hw11.css";
+import "../styles/hw13.css";
 import { myPow } from "../scripts/hw3.js";
 import { getPairs } from "../scripts/hw4.js";
 import { getRandomArray } from "../scripts/hw5.js";
@@ -11,6 +12,11 @@ import { getMyTaxes } from "../scripts/hw7.js";
 import { student } from "../scripts/hw8.js";
 import { generateBlocks } from "../scripts/hw9.js";
 import { eventsFunction } from "../scripts/hw11.js";
+import { getRandomChinese } from "../scripts/hw12.js";
+import { renderPlanet } from "../scripts/hw13.js";
+import sw from "../assets/sw.png";
+import { addListeners } from "../scripts/hw14.js";
+import { fontGenerator } from "../scripts/hw14.js";
 
 let container = document.querySelector('.container');
 
@@ -74,5 +80,36 @@ hw11.innerHTML = (`<h2>Homework 11</h2>
     </div>
 `);
 eventsFunction();
+//hw12
+let hw12 = addHW();
+hw12.innerHTML = (`<h2>Homework 12</h2>`);
+getRandomChinese(4).then(result => {
+    hw12.innerHTML += result;
+});
+
+//hw13
+let hw13 = addHW(container, 'hw13');
+hw13.innerHTML = (`<h2>Homework 13</h2>
+        <div id="planets"></div>`);
+hw13.style.background = `url('${sw}') repeat`;
+renderPlanet('https://swapi.dev/api/planets');
+
+//hw14
+let hw14 = addHW();
+hw14.innerHTML = (`<h2 id="text">Homework 14</h2>
+    <div class="buttons">
+      <button id="inc">Збільшити</button>
+      <button id="dec">Зменшити</button>
+    </div>
+`);
+
+fontGenerator.next();
+
+addListeners();
+
+
+
+
+
 
 

@@ -1,0 +1,20 @@
+.hw13 {
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  margin: 0 auto;
+  background-position: top;
+  background-color: #000;
+  color: yellow;
+}
+
+.titres {
+  background-color: #000;
+  color: yellow;
+}
+
+.planet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: yellow;
+}
