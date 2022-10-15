@@ -1,0 +1,31 @@
+import "../styles/styles.css";
+// import Image from "../../src/assets/bg.jpg";
+
+import { getMaxDigit } from "../scripts/hw3";
+
+// let a = () => {
+//   let b = 888888;
+//   return b
+// };
+// console.log(a());
+
+
+// const renderHeader = () => {
+//   const headerLayout = `
+//   <container>
+//     <img src="${Image}" />
+//   </container>
+// `;
+//   document.body.innerHTML = headerLayout;
+
+// };
+
+// console.log(888777);
+// renderHeader();
+
+let N = 1236;
+// document.writeln(`1. Найбільша цифра в числі ${N} є  ${getMaxDigit(N)} <br>`);
+// document.writeln(`1. Найбільша цифра в числі ${N} є  ${getMaxDigit(N)} <br>`);
+// console.log(`1. Найбільша цифра в числі ${N} є  ${getMaxDigit(N)} `);
+
+console.log(getMaxDigit(777));

@@ -8,8 +8,18 @@ body {
   max-width: 1024px;
   margin: 0 auto;
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* border: 1px solid #000; */
 }
 
-img {
-  width: 1024px;
+.item {
+  min-height: 50px;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  padding: 5px 15px;
+  border-bottom: 1px solid #000;
 }
