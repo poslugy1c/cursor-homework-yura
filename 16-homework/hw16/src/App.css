@@ -1,0 +1,41 @@
+.App {
+  max-width: 960px;
+  width: 100%;
+  margin: 80px auto;
+}
+.container {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+.author_photo {
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+  margin-right: 15px;
+}
+h1 {
+  font-size: 26px;
+}
+.author_nickname,
+.date {
+  margin-left: 15px;
+  opacity: 0.6;
+}
+.flag {
+  margin-left: 10px;
+  width: 30px;
+}
+.content {
+  color: #fff;
+  margin-left: 90px;
+  font-size: 18px;
+}
+.post_image {
+  margin-top: 20px;
+  margin-left: 88px;
+}
+.post_image img {
+  border-radius: 30px;
+  width: 600px;
+}
