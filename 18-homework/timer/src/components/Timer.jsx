@@ -3,11 +3,20 @@ import React, { Component } from "react";
 class Timer extends Component {
   constructor(props) {
     super(props);
+
+    const saved = localStorage.getItem("autostart");
+    const currAutostart = saved ? JSON.parse(saved) : false;
+
     this.state = {
-      step: 5,
-      autostart: false,
-      progressBar: 400,
-      interval: this.interval,
+      time: props.time,
+      step: props.step,
+      autostart: currAutostart,
+      progressBar: props.progressBar,
+      pause: true,
+      onTick: props.onTick,
+      onTimeStart: props.onTimeStart,
+      onTimePause: props.onTimePause,
+      onTimeEnd: props.onTimeEnd,
     };
   }
   componentDidMount() {
@@ -17,45 +26,68 @@ class Timer extends Component {
     }
   }
 
-  autostartSwitch = () => {
-    this.setState({
-      autostart: !this.state.autostart,
+  componentWillUnmount() {}
+
+  autostartSwitch = (e) => {
+    this.setState({ autostart: e.target.checked }, () => {
+      // console.log(this.state.autostart);
+      this.currAutostart = this.state.autostart;
+      localStorage.setItem("autostart", JSON.stringify(this.state.autostart));
     });
-    // console.log(this.state.autostart);
   };
 
   timerOn = () => {
-    this.interval = setInterval(() => {
-      const { step, progressBar } = this.state;
+    this.pause = !this.pause;
+    let interval;
+
+    if (this.state.step === 1 || this.state.step < 0) {
       this.setState({
-        step: step - 1,
-        progressBar: progressBar - progressBar / step,
+        step: this.props.step,
+        progressBar: this.props.progressBar,
+        time: this.props.time,
       });
-      document.querySelector(".progress").style.width = `${
-        progressBar - progressBar / step
-      }px `;
-    }, 1000);
+    }
+
+    if (this.pause) {
+      this.state.onTimeStart();
+      this.interval = setInterval(() => {
+        const { step, progressBar, time } = this.state;
+
+        if (this.state.step === 1 || this.state.step < 0) {
+          clearInterval(this.interval);
+          this.state.onTimeEnd();
+        }
+
+        this.setState({
+          step: step - 1,
+          progressBar: progressBar - progressBar / step,
+          time: time - 1,
+        });
+        document.querySelector(".progress").style.width = `${
+          progressBar - progressBar / step
+        }px `;
+      }, 1000);
+    } else {
+      this.state.onTimePause();
+      clearInterval(this.interval);
+    }
   };
 
   componentDidUpdate() {
-    if (this.state.step === 0) {
-      // console.log(this.state.step);
-      clearInterval(this.interval);
-    }
+    this.state.onTick(this.state.time);
   }
 
   render() {
-    let { step } = this.state;
+    let { step, autostart } = this.state;
     return (
       <div className="wrapper">
         <div className="container">
           <label htmlFor="autostart">
-            autostart
+            автострарт
             <input
               type="checkbox"
-              defaultChecked={this.state.autostart}
-              id="autostart"
-              onChange={this.autostartSwitch}
+              checked={autostart}
+              onChange={(e) => this.autostartSwitch(e)}
             />
           </label>
 
