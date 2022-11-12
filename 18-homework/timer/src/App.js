@@ -1,10 +1,11 @@
+import React from 'react';
 import './App.css';
-import FillContacts from './components/Contacts';
+import Timer from './components/Timer';
 
 function App() {
   return (
     <div className="App">
-      <FillContacts />
+      <Timer />
     </div>
   );
 }

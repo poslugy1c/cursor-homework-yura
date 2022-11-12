@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/cursor-homework-yura/static/css/main.08130a64.css",
-    "main.js": "/cursor-homework-yura/static/js/main.48732bc2.js",
-    "static/js/787.f2e22480.chunk.js": "/cursor-homework-yura/static/js/787.f2e22480.chunk.js",
-    "static/media/male.svg": "/cursor-homework-yura/static/media/male.4d4d127efbc412daee40d98ded411489.svg",
-    "index.html": "/cursor-homework-yura/index.html",
-    "static/media/female.svg": "/cursor-homework-yura/static/media/female.8d797ddc673d2d9e1e4ada9b3c6a8c77.svg",
-    "main.08130a64.css.map": "/cursor-homework-yura/static/css/main.08130a64.css.map",
-    "main.48732bc2.js.map": "/cursor-homework-yura/static/js/main.48732bc2.js.map",
-    "787.f2e22480.chunk.js.map": "/cursor-homework-yura/static/js/787.f2e22480.chunk.js.map"
+    "main.css": "/cursor_react_hooks/static/css/main.08130a64.css",
+    "main.js": "/cursor_react_hooks/static/js/main.008750b9.js",
+    "static/js/787.f2e22480.chunk.js": "/cursor_react_hooks/static/js/787.f2e22480.chunk.js",
+    "static/media/male.svg": "/cursor_react_hooks/static/media/male.4d4d127efbc412daee40d98ded411489.svg",
+    "index.html": "/cursor_react_hooks/index.html",
+    "static/media/female.svg": "/cursor_react_hooks/static/media/female.8d797ddc673d2d9e1e4ada9b3c6a8c77.svg",
+    "main.08130a64.css.map": "/cursor_react_hooks/static/css/main.08130a64.css.map",
+    "main.008750b9.js.map": "/cursor_react_hooks/static/js/main.008750b9.js.map",
+    "787.f2e22480.chunk.js.map": "/cursor_react_hooks/static/js/787.f2e22480.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.08130a64.css",
-    "static/js/main.48732bc2.js"
+    "static/js/main.008750b9.js"
   ]
 }
